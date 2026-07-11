@@ -1,0 +1,30 @@
+# Environment variables
+.env
+.env.*
+
+# Python cache and compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Models and large files
+models/
+*.safetensors
+*.bin
+
+# Logs
+logs/
+*.log
+
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Backup files
+*.bak

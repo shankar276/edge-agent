@@ -1,0 +1,84 @@
+# EdgeAgent Configuration
+model:
+  # Path to local model directory (downloaded from Hugging Face)
+  path: "models/qwen2.5-0.5b-instruct"
+  
+  # Context window
+  max_context_length: 4096
+  max_new_tokens: 512
+  
+  # Generation parameters
+  temperature: 0.7
+  top_p: 0.9
+  top_k: 50
+  repetition_penalty: 1.1
+
+# Inference backend: "transformers" (default) or "onnx" (when available)
+backend: "transformers"
+
+# Agent settings
+agent:
+  system_prompt: |
+    You are EdgeAgent, a lightweight AI assistant optimized for on-device inference.
+    You have access to tools for file operations, system info, and local computations.
+    Keep responses concise and practical.
+  
+  # Tool definitions (OpenAI function calling format)
+  tools:
+    - name: "read_file"
+      description: "Read contents of a local file"
+      parameters:
+        type: "object"
+        properties:
+          path:
+            type: "string"
+            description: "Absolute path to file"
+        required: ["path"]
+    
+    - name: "write_file"
+      description: "Write content to a local file"
+      parameters:
+        type: "object"
+        properties:
+          path:
+            type: "string"
+            description: "Absolute path to file"
+          content:
+            type: "string"
+            description: "Content to write"
+        required: ["path", "content"]
+    
+    - name: "list_files"
+      description: "List files in a directory"
+      parameters:
+        type: "object"
+        properties:
+          path:
+            type: "string"
+            description: "Directory path"
+        required: ["path"]
+    
+    - name: "run_command"
+      description: "Execute a shell command (use cautiously)"
+      parameters:
+        type: "object"
+        properties:
+          command:
+            type: "string"
+            description: "Command to execute"
+          timeout:
+            type: "integer"
+            description: "Timeout in seconds"
+            default: 30
+        required: ["command"]
+    
+    - name: "get_system_info"
+      description: "Get system resource usage"
+      parameters:
+        type: "object"
+        properties: {}
+
+# Logging
+logging:
+  level: "INFO"
+  file: "logs/edge_agent.log"

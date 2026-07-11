@@ -1,0 +1,15 @@
+# Core dependencies
+onnxruntime==1.18.0
+optimum[onnxruntime]==1.18.0
+transformers==4.40.0
+huggingface_hub==0.22.0
+torch==2.3.0
+numpy==1.24.0
+pyyaml==6.0.1
+python-dotenv==1.0.0
+
+# Optional: for quantization
+onnxruntime-extensions==1.18.0
+
+# SystemInfo
+psutil==5.9.8

@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  edge-agent-cloud:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - LOG_LEVEL=info
+    restart: unless-stopped
+    volumes:
+      - ./data:/app/data
